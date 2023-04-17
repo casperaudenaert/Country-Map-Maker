@@ -11,22 +11,6 @@ import re
 
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0  # Disable caching of map HTML files
-def addCSS(html):
-    with open("file.html") as fp:
-        soup = BeautifulSoup(fp, "html.parser")
-
-# create a new link tag for the CSS stylesheet
-    link_tag = soup.new_tag("link", href="/static/styles/style.css", rel="stylesheet")
-
-# find the head tag
-    head_tag = soup.find("head")
-
-# append the link tag to the head tag
-    head_tag.append(link_tag)
-
-# save the modified HTML
-    with open("file.html", "w") as fp:
-        fp.write(str(soup))
 
 def addTag(html):
     with open(html) as fp:
@@ -36,6 +20,7 @@ def addTag(html):
     button_tag = soup.new_tag("button")
     button_tag.string = "Return"
     button_tag['onclick'] = "history.go(-1)"
+    button_tag['style'] = "background-color: #4CAF50; color: white; padding: 12px 20px; border: none; border-radius: 4px; cursor: pointer;"
 # find the script tag
     script_tag = soup.find("script", text=re.compile("L_NO_TOUCH"))
 
