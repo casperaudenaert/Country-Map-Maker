@@ -30,7 +30,7 @@ def addTag(html):
 # save the modified HTML
     with open(html, "w") as fp:
         fp.write(str(soup)) 
-
+#test comment
 @app.route('/', methods=['GET', 'POST'])
 def index():
     path = "./templates/"
