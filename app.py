@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request
 import folium
 from geopy.geocoders import Nominatim
-from folium.plugins import AntPath
 import time
 import os
 import pandas as pd
