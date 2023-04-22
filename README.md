@@ -12,7 +12,7 @@
 <p align="center">
   <a href="#key-features">Key Features</a> •
   <a href="#how-to-use">How To Use</a> •
-  <a href="#Features-in-development">How To Use</a>
+  <a href="#Features-in-development">Features in development</a>
 </p>
 
 ![screenshot](https://raw.githubusercontent.com/casperaudenaert/country-map-maker/master/app/img/screen.png)
