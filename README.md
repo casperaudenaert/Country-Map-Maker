@@ -52,4 +52,4 @@ Notice that all names need to be entered in English.
 * Add screenshot button
 
   # Demo
-  **Comming soon**
+  [Demo](https://country-map-maker.herokuapp.com/)
