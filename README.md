@@ -10,17 +10,8 @@
 <h4 align="center">A minimal Map maker<a href="http://electron.atom.io" target="_blank">Electron</a>.</h4>
 
 <p align="center">
-    <img src="https://badge.fury.io/js/electron-markdownify.svg"
-         alt="Gitter">
-  </a>
-      <img src="https://img.shields.io/badge/SayThanks.io-%E2%98%BC-1EAEDB.svg">
-  </a>
-    <img src="https://img.shields.io/badge/$-donate-ff69b4.svg?maxAge=2592000&amp;style=flat">
-</p>
-
-<p align="center">
   <a href="#key-features">Key Features</a> •
-  <a href="#how-to-use">How To Use</a> •
+  <a href="#how-to-use">How To Use</a>
 </p>
 
 ![screenshot](https://raw.githubusercontent.com/casperaudenaert/country-map-maker/master/app/img/screen.png)
