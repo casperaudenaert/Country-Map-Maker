@@ -7,7 +7,7 @@
   <br>
 </h1>
 
-<h4 align="center">A minimal Map maker<a href="http://electron.atom.io" target="_blank">Electron</a>.</h4>
+<h4 align="center">A minimal Map maker<a. href="http://electron.atom.io" target="_blank"></a.</h4>
 
 <p align="center">
   <a href="#key-features">Key Features</a> •
