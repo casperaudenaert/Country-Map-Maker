@@ -41,7 +41,7 @@ When asked for countries, cities you have to enter them with a comma between the
 Example: Belgium,Germany,France
 Notice that all names need to be entered in English.
 
-#Features in development
+# Features in development
 
 * Add autocorrection for countries and cities
 * Add placeholders to inputfields
