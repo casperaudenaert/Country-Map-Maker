@@ -23,7 +23,7 @@
   <a href="#how-to-use">How To Use</a> •
 </p>
 
-![screenshot](https://raw.githubusercontent.com/amitmerchant1990/electron-markdownify/master/app/img/screen.png)
+![screenshot](https://github.com/casperaudenaert/Country-Map-Maker/tree/main/app/imgscreen.png)
 
 ## Key Features
 
