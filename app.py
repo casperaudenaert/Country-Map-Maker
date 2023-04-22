@@ -3,8 +3,6 @@ import folium
 from geopy.geocoders import Nominatim
 import time
 import os
-import pandas as pd
-import difflib
 from bs4 import BeautifulSoup
 import re
 
