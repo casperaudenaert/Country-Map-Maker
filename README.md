@@ -43,6 +43,7 @@ Notice that all names need to be entered in English.
 
 # Features in development
 
+* Add demo
 * Add autocorrection for countries and cities
 * Add placeholders to inputfields
 * Cron jobs to delete files every x time
