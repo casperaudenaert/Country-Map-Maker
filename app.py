@@ -49,15 +49,9 @@ def index():
         filename = f"map_{timestamp}.html"
         # Get the form data
         country_name = request.form.get('country')
-        city_names_tmp = request.form.get('cities').split(',')
+        city_names = request.form.get('cities').split(',')
         marker_color = request.form.get('marker_color', '#000000')
         line_color = request.form.get('line_color', '#000000')
-
-        city_names = []
-        df = pd.read_csv("worldcities.csv")
-
-        for name in city_names_tmp:
-           city_names.append(difflib.get_close_matches(name, df.loc[df['country'] == country_name]["city"].tolist())[0])
 
         # Create a Map object centered on the country with a white background
         geolocator = Nominatim(user_agent="my_map")
