@@ -4,7 +4,9 @@ from geopy.geocoders import Nominatim
 import time
 import os
 from bs4 import BeautifulSoup
+import requests
 import re
+from difflib import SequenceMatcher
 
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0  # Disable caching of map HTML files
@@ -46,45 +48,49 @@ def index():
         timestamp = int(time.time())
         filename = f"map_{timestamp}.html"
         # Get the form data
-        country_name = request.form.get('country')
+        country_names = request.form.get('country').split(',')
         city_names = request.form.get('cities').split(',')
         marker_color = request.form.get('marker_color', '#000000')
         line_color = request.form.get('line_color', '#000000')
 
         # Create a Map object centered on the country with a white background
         geolocator = Nominatim(user_agent="my_map")
-        location = geolocator.geocode(country_name)
+        location = geolocator.geocode(country_names[0])
         map_obj = folium.Map(location=[location.latitude, location.longitude], zoom_start=6, tiles='cartodbpositron')
         map_obj.get_root().html.add_child(folium.Element("<style>.folium-map {cursor: crosshair;}</style>"))
 
         # Add circles with labels for each city to the map
         locations = []
-        for i, city_name in enumerate(city_names):
-            location = geolocator.geocode(city_name + ", " + country_name)
-            if location and location.latitude and location.longitude:
-                # Define the circle style
-                circle_style = "background-color:{};border-radius:50%;text-align:center;display:inline-block".format(marker_color)
-                # Define the label style
-                label_style = "font-weight:bold;text-align:center;display:inline-block;width:100%;margin-top:-1px; color:black"
-                # Add the circle
-                folium.CircleMarker(
-                    location=[location.latitude, location.longitude],
-                    radius=7,
-                    fill=True,
-                    fill_opacity=1,
-                    color=marker_color,
-                    fill_color=marker_color,
-                    popup=city_name,
-                    tooltip=city_name,
-                    overlay=True,
-                    show=True,
-                    style= circle_style,
-                    z_index=99999
-                ).add_to(map_obj)
-                locations.append([location.latitude, location.longitude])
-            else:
-                print("Error geocoding city:", city_name)
-
+        for country_name in country_names:
+            for i, city_name in enumerate(city_names):
+                response = requests.request("GET", f"https://www.geonames.org/search.html?q={city_name}&country=")
+                country = re.findall("/countries.*\.html", response.text)[0].strip(".html").split("/")[-1]
+                s = SequenceMatcher(None, country_name, country)
+                if s.ratio() >= 0.75:
+                    location = geolocator.geocode(city_name + ", " + country_name)
+                    if location and location.latitude and location.longitude:
+                        # Define the circle style
+                        circle_style = "background-color:{};border-radius:50%;text-align:center;display:inline-block".format(marker_color)
+                        # Define the label style
+                        label_style = "font-weight:bold;text-align:center;display:inline-block;width:100%;margin-top:-1px; color:black"
+                        # Add the circle
+                        folium.CircleMarker(
+                            location=[location.latitude, location.longitude],
+                            radius=7,
+                            fill=True,
+                            fill_opacity=1,
+                            color=marker_color,
+                            fill_color=marker_color,
+                            popup=city_name,
+                            tooltip=city_name,
+                            overlay=True,
+                            show=True,
+                            style= circle_style,
+                            z_index=99999
+                        ).add_to(map_obj)
+                        locations.append([location.latitude, location.longitude])
+                    else:
+                        print("Error geocoding city:", city_name)
         # Connect the circles with a line
         folium.PolyLine(
             locations,
