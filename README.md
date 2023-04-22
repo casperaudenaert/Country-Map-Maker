@@ -33,7 +33,7 @@
 ## How To Use
 
 To clone and run this application, you'll need [Git](https://git-scm.com) and [pip](https://flask.palletsprojects.com/en/2.2.x/#https://pip.pypa.io/en/stable/)
-
+```bash
 $ git clone https://github.com/casperaudenaert/Country-Map-Maker
 
 # Go into the repository
