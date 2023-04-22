@@ -23,7 +23,7 @@
   <a href="#how-to-use">How To Use</a> •
 </p>
 
-![screenshot](https://github.com/casperaudenaert/Country-Map-Maker/tree/main/app/imgscreen.png)
+![screenshot](https://raw.githubusercontent.com/casperaudenaert/country-map-maker/master/app/img/screen.png)
 
 ## Key Features
 
