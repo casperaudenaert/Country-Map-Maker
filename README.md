@@ -11,7 +11,8 @@
 
 <p align="center">
   <a href="#key-features">Key Features</a> •
-  <a href="#how-to-use">How To Use</a>
+  <a href="#how-to-use">How To Use</a> •
+  <a href="#Features-in-development">How To Use</a>
 </p>
 
 ![screenshot](https://raw.githubusercontent.com/casperaudenaert/country-map-maker/master/app/img/screen.png)
@@ -36,3 +37,14 @@ $ pip install-r requirements.txt
 # Run the app
 $ flask run 
 ```
+When asked for countries, cities you have to enter them with a comma between them
+Example: Belgium,Germany,France
+Notice that all names need to be entered in English.
+
+#Features in development
+
+* Add autocorrection for countries and cities
+* Add placeholders to inputfields
+* Cron jobs to delete files every x time
+* Add download button to download the html file
+* Add screenshot button
