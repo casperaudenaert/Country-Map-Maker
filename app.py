@@ -50,7 +50,7 @@ def index():
         # Get the form data
         country_name = request.form.get('country')
         city_names_tmp = request.form.get('cities').split(',')
-        marker_color = request.form.get('marker_color', '#f7d2bb')
+        marker_color = request.form.get('marker_color', '#000000')
         line_color = request.form.get('line_color', '#000000')
 
         city_names = []
