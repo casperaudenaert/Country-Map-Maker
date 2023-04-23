@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_file
 import folium
 from geopy.geocoders import Nominatim
 import time
@@ -10,15 +10,14 @@ from difflib import SequenceMatcher
 
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0  # Disable caching of map HTML files
-
-def addTag(html):
+def addButton(html, onclick):
     with open(html) as fp:
         soup = BeautifulSoup(fp, "html.parser")
-#test
+
 # create a new button tag
     button_tag = soup.new_tag("button")
     button_tag.string = "Return"
-    button_tag['onclick'] = "history.go(-1)"
+    button_tag['onclick'] = onclick
     button_tag['style'] = "background-color: #4CAF50; color: white; padding: 12px 20px; border: none; border-radius: 4px; cursor: pointer;"
 # find the script tag
     script_tag = soup.find("script", text=re.compile("L_NO_TOUCH"))
@@ -44,7 +43,6 @@ def index():
         # If it's not, remove the file
             os.remove(os.path.join(path, file))
     if request.method == 'POST':
-
         timestamp = int(time.time())
         filename = f"map_{timestamp}.html"
         # Get the form data
@@ -53,7 +51,7 @@ def index():
         marker_color = request.form.get('marker_color', '#000000')
         line_color = request.form.get('line_color', '#000000')
         line_style = request.form.get('line_style')
-        print(line_style)
+
         # Create a Map object centered on the country with a white background
         geolocator = Nominatim(user_agent="my_map")
         location = geolocator.geocode(country_names[0])
@@ -72,8 +70,6 @@ def index():
                     if location and location.latitude and location.longitude:
                         # Define the circle style
                         circle_style = "background-color:{};border-radius:50%;text-align:center;display:inline-block".format(marker_color)
-                        # Define the label style
-                        label_style = "font-weight:bold;text-align:center;display:inline-block;width:100%;margin-top:-1px; color:black"
                         # Add the circle
                         folium.CircleMarker(
                             location=[location.latitude, location.longitude],
@@ -113,11 +109,16 @@ def index():
         # Save the map to an HTML file
         map_obj.save(f'templates/{filename}')
 
-        addTag(f'templates/{filename}')
+        addButton(f'templates/{filename}', "history.go(-1)")
+        addButton(f'templates/{filename}', "location.href = 'https://country-map-maker.herokuapp.com/download?filename={filename}';")
         # Render the map HTML file to the user
         return render_template(filename)
-
     return render_template('index.html')
+
+@app.route('/download', methods=['GET', 'POST'])
+def download():
+    filename = request.args.get('filename')
+    return send_file(f'templates/{filename}', as_attachment=True)
 
 if __name__ == '__main__':
     app.run(debug=True)
