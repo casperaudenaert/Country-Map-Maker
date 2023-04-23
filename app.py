@@ -37,7 +37,7 @@ def index():
     keep_files = ["index.html", "map.html","style.css"]
 
 # Loop through all the files in the directory
-    for file in os.listdir(path):
+    for file in os.listdir('./test/'):
     # Check if the file is not in the list of files to keep
         if file not in keep_files:
         # If it's not, remove the file
