@@ -46,7 +46,7 @@ Notice that all names need to be entered in English.
 
 * ~~Add demo~~
 * Add autocorrection for countries and cities
-* Add placeholders to inputfields
+* ~~Add placeholders to inputfields~~
 * Cron jobs to delete files every x time
 * Add download button to download the html file
 * Add screenshot button
