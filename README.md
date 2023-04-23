@@ -50,6 +50,7 @@ Notice that all names need to be entered in English.
 * Cron jobs to delete files every x time
 * Add download button to download the html file
 * Add screenshot button
+* ~~Add line style selector~~
 
   # Demo
   [Demo](https://country-map-maker.herokuapp.com/)
