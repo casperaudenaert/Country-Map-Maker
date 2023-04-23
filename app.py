@@ -10,13 +10,13 @@ from difflib import SequenceMatcher
 
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0  # Disable caching of map HTML files
-def addButton(html, onclick):
+def addButton(html, onclick, title):
     with open(html) as fp:
         soup = BeautifulSoup(fp, "html.parser")
 
 # create a new button tag
     button_tag = soup.new_tag("button")
-    button_tag.string = "Return"
+    button_tag.string = title
     button_tag['onclick'] = onclick
     button_tag['style'] = "background-color: #4CAF50; color: white; padding: 12px 20px; border: none; border-radius: 4px; cursor: pointer;"
 # find the script tag
@@ -109,8 +109,8 @@ def index():
         # Save the map to an HTML file
         map_obj.save(f'templates/{filename}')
 
-        addButton(f'templates/{filename}', "history.go(-1)")
-        addButton(f'templates/{filename}',f"location.href = 'https://country-map-maker.herokuapp.com/download?filename={filename}';")
+        addButton(f'templates/{filename}', "history.go(-1)", "Return")
+        addButton(f'templates/{filename}',f"location.href = 'https://country-map-maker.herokuapp.com/download?filename={filename}';", "Download")
         # Render the map HTML file to the user
         return render_template(filename)
     return render_template('index.html')
