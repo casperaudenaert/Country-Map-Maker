@@ -110,7 +110,7 @@ def index():
         map_obj.save(f'templates/{filename}')
 
         addButton(f'templates/{filename}', "history.go(-1)")
-        addButton(f'templates/{filename}', "location.href = 'https://country-map-maker.herokuapp.com/download?filename={filename}';")
+        addButton(f'templates/{filename}',f"location.href = 'https://country-map-maker.herokuapp.com/download?filename={filename}';")
         # Render the map HTML file to the user
         return render_template(filename)
     return render_template('index.html')
