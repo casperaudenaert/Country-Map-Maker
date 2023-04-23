@@ -52,7 +52,8 @@ def index():
         city_names = request.form.get('cities').split(',')
         marker_color = request.form.get('marker_color', '#000000')
         line_color = request.form.get('line_color', '#000000')
-
+        line_style = request.form.get('line_style')
+        print(line_style)
         # Create a Map object centered on the country with a white background
         geolocator = Nominatim(user_agent="my_map")
         location = geolocator.geocode(country_names[0])
@@ -92,15 +93,23 @@ def index():
                     else:
                         print("Error geocoding city:", city_name)
         # Connect the circles with a line
-        folium.PolyLine(
-            locations,
-            color=line_color,
-            weight=2,
-            opacity=0.7,
-            dash_array='5,10',
-            z_index=0
-        ).add_to(map_obj)
-
+        if line_style == "on":  
+            folium.PolyLine(
+                locations,
+                color=line_color,
+                weight=2,
+                opacity=0.7,
+                z_index=0
+            ).add_to(map_obj)
+        else:
+            folium.PolyLine(
+                locations,
+                color=line_color,
+                weight=2,
+                opacity=0.7,
+                dash_array='5,10',
+                z_index=0
+            ).add_to(map_obj)
         # Save the map to an HTML file
         map_obj.save(f'templates/{filename}')
 
